@@ -63,15 +63,14 @@ public class Utils {
         final String PATH = "C:\\Users\\adrian.reapor\\Documents\\OOP\\FamilyFued\\questions.txt";
 
         QuestionManager questions = new QuestionManager(PATH);
-        // for (QuestionItem question : questions.getQuestions()) {
-        // question.print();
-        // }
         QuestionItem current = null;
-        do {
+        while (true) {
             current = questions.getRandomUnusedQuestion();
+            if (current == null)
+                break;
             current.print();
             current.setUsed();
-        } while (current != null);
+        }
 
     }
 }
