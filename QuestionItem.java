@@ -2,13 +2,14 @@ package FamilyFued;
 
 import java.util.ArrayList;
 
-public class QuestionItem implements Printable<QuestionItem> {
+public class QuestionItem implements Printable, Useable {
 
     // Properties
     private final int id;
     private final String difficulty;
     private final String question;
     private ArrayList<Answer> answers;
+    private boolean isUsed;
 
     // Constructors
     public QuestionItem(
@@ -18,15 +19,7 @@ public class QuestionItem implements Printable<QuestionItem> {
         this.question = question;
 
         this.answers = new ArrayList<>();
-    }
-
-    // Constructors
-    public QuestionItem(
-            int id, String difficulty, String question, ArrayList<Answer> answers) {
-        this.id = id;
-        this.difficulty = difficulty;
-        this.question = question;
-        this.answers = answers;
+        this.isUsed = false;
     }
 
     // Getters
@@ -44,6 +37,25 @@ public class QuestionItem implements Printable<QuestionItem> {
 
     public ArrayList<Answer> getAnswers() {
         return answers;
+    }
+
+    public Answer getAnswer(int index) {
+        return answers.get(index);
+    }
+
+    public boolean getIfUsed() {
+        return isUsed;
+    }
+
+    // Setters
+    public QuestionItem setUsed() {
+        this.isUsed = true;
+        return this;
+    }
+
+    public QuestionItem setUsed(boolean value) {
+        this.isUsed = value;
+        return this;
     }
 
     // Methods

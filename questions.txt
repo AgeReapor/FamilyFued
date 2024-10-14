@@ -1,11 +1,48 @@
-1 - easy - Name a popular programming language.
-    35 - Python
-    25 - Java
-    15 - C++
-    5 - Javascript
-2 - easy - What is a common mistake in programming?
-    30 - Syntax errors
-    25 - Off-by-one errors
-    20 - Infinite loops
-    15 - Misnaming variables
-    10 - Not commenting code    
+1 - easy - Name a social media platform that gained massive popularity in the 2010s.
+    40 - Instagram
+    30 - Twitter
+    15 - Snapchat
+    10 - TikTok
+    5 - Tumblr
+
+2 - easy - Name a viral meme from the 2010s.
+    35 - Doge
+    25 - Harambe
+    20 - Distracted Boyfriend
+    10 - Salt Bae
+    5 - Kermit Sipping Tea
+
+3 - medium - Name a popular YouTuber from the 2010s.
+    35 - PewDiePie
+    30 - Markiplier
+    15 - Jenna Marbles
+    10 - Shane Dawson
+    5 - Zoella
+
+4 - medium - Name a popular video game released in the 2010s.
+    40 - Fortnite
+    30 - Minecraft
+    15 - The Witcher 3
+    10 - GTA V
+    5 - Overwatch
+
+5 - hard - Name a popular mobile app that emerged in the 2010s.
+    35 - Snapchat
+    25 - WhatsApp
+    15 - Instagram
+    10 - Uber
+    5 - Tinder
+
+6 - hard - Name a slang term that became widely used online in the 2010s.
+    30 - Lit
+    25 - YOLO
+    20 - FOMO
+    15 - Bae
+    10 - Thirsty
+
+7 - hard - Name a major internet challenge trend from the 2010s.
+    40 - Ice Bucket Challenge
+    30 - Mannequin Challenge
+    20 - Tide Pod Challenge
+    10 - Planking
+    5 - Harlem Shake

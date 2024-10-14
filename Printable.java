@@ -1,5 +1,5 @@
 package FamilyFued;
 
-public interface Printable<T> {
-    T print();
+public interface Printable {
+    Printable print();
 }

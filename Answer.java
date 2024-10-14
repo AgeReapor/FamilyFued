@@ -1,9 +1,10 @@
 package FamilyFued;
 
-public class Answer implements Printable<Answer> {
+public class Answer implements Printable, Useable {
     // public final properties
     public final int score;
     public final String answerText;
+    private boolean isUsed;
 
     // constructor
     public Answer(int score, String answerText) {
@@ -11,6 +12,23 @@ public class Answer implements Printable<Answer> {
         this.answerText = answerText;
     }
 
+    // Getters
+    public boolean getIfUsed() {
+        return isUsed;
+    }
+
+    // Setters
+    public Answer setUsed() {
+        this.isUsed = true;
+        return this;
+    }
+
+    public Answer setUsed(boolean value) {
+        this.isUsed = value;
+        return this;
+    }
+
+    // Methods
     public String toString() {
         return String.format(
                 "%02d - %s",
