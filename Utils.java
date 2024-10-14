@@ -7,6 +7,24 @@ import java.util.ArrayList;
 
 public class Utils {
 
+    // Debug Driver Function
+    public static void main(String[] args) {
+
+        // CHANGE THIS TO FULL PATH OF FILE
+        final String PATH = "C:\\Users\\ajrea\\OneDrive\\Documents\\School\\UNC\\24-25 1st\\OOP\\activities\\FamilyFued\\questions.txt";
+
+        QuestionManager questions = new QuestionManager(PATH);
+        QuestionItem current = null;
+        while (true) {
+            current = questions.getRandomUnusedQuestion();
+            if (current == null)
+                break;
+            current.print();
+            current.setUsed();
+        }
+
+    }
+
     /*
      * Generates questions from pathToFile
      */
@@ -57,20 +75,4 @@ public class Utils {
         return questionList;
     }
 
-    // Question and answer entry
-    public static void main(String[] args) {
-
-        final String PATH = "C:\\Users\\adrian.reapor\\Documents\\OOP\\FamilyFued\\questions.txt";
-
-        QuestionManager questions = new QuestionManager(PATH);
-        QuestionItem current = null;
-        while (true) {
-            current = questions.getRandomUnusedQuestion();
-            if (current == null)
-                break;
-            current.print();
-            current.setUsed();
-        }
-
-    }
 }
