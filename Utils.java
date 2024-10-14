@@ -10,7 +10,7 @@ public class Utils {
     // Debug Driver Function
     public static void main(String[] args) {
 
-        // CHANGE THIS TO FULL PATH OF FILE
+        // * CHANGE THIS TO FULL PATH OF FILE
         final String PATH = "C:\\Users\\ajrea\\OneDrive\\Documents\\School\\UNC\\24-25 1st\\OOP\\activities\\FamilyFued\\questions.txt";
 
         QuestionManager questions = new QuestionManager(PATH);
@@ -19,8 +19,8 @@ public class Utils {
             current = questions.getRandomUnusedQuestion();
             if (current == null)
                 break;
-            current.print();
             current.setUsed();
+            current.print();
         }
 
     }

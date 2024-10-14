@@ -31,8 +31,9 @@ public class Answer implements Printable, Useable {
     // Methods
     public String toString() {
         return String.format(
-                "%02d - %s",
+                "%02d%s - %s",
                 this.score,
+                this.isUsed ? " [USED]" : "",
                 this.answerText);
     }
 

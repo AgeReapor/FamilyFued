@@ -74,9 +74,10 @@ public class QuestionItem implements Printable, Useable {
 
     public String toString() {
         String ret = String.format(
-                "%02d - [%s]: %s",
+                "%02d-%s%s: %s",
                 this.id,
                 this.difficulty,
+                isUsed ? " [USED]" : "",
                 this.question);
         for (Answer answer : this.answers) {
             ret += "\n\t" + answer;
