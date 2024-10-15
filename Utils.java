@@ -13,15 +13,30 @@ public class Utils {
         // * CHANGE THIS TO FULL PATH OF FILE
         final String PATH = "C:\\Users\\ajrea\\OneDrive\\Documents\\School\\UNC\\24-25 1st\\OOP\\activities\\FamilyFued\\questions.txt";
 
-        QuestionManager questions = new QuestionManager(PATH);
-        QuestionItem current = null;
-        while (true) {
-            current = questions.getRandomUnusedQuestion();
-            if (current == null)
-                break;
-            current.setUsed();
-            current.print();
-        }
+        final int MAXLIVES = 3;
+        GameManager game = new GameManager(PATH, MAXLIVES);
+        game.startRound(0)
+                .print()
+                .playAnswer("noodles")
+                .print()
+                .playAnswer("noodles")
+                .print()
+                .playAnswer("hotdog sandwich")
+                .print()
+                .playAnswer("noodles")
+                .print()
+                .playAnswer("noodles")
+                .print();
+
+        // QuestionManager questions = new QuestionManager(PATH);
+        // QuestionItem current = null;
+        // while (true) {
+        // current = questions.getRandomUnusedQuestion();
+        // if (current == null)
+        // break;
+        // current.setUsed();
+        // current.print();
+        // }
 
     }
 
@@ -45,21 +60,21 @@ public class Utils {
                 // Split line by dashes
                 String[] dataSplit = data.split("-");
 
-                // If result has 3 elements, generate a new question
-                if (dataSplit.length == 3) {
+                // If result has 2 elements, generate a new question
+                if (dataSplit.length == 2) {
                     if (currentQuestion != null)
                         questionList.add(currentQuestion);
                     currentQuestion = new QuestionItem(
-                            Integer.parseInt(dataSplit[0].trim()),
-                            dataSplit[1].trim(),
-                            dataSplit[2].trim());
+                            dataSplit[0].trim(),
+                            dataSplit[1].trim());
 
-                    // If result has 2 elements, generate answer and add to current question
-                } else if (dataSplit.length == 2) {
+                    // If result has 3 elements, generate answer and add to current question
+                } else if (dataSplit.length == 3) {
                     if (currentQuestion != null)
                         currentQuestion.addAnswer(new Answer(
                                 Integer.parseInt(dataSplit[0].trim()),
-                                dataSplit[1].trim()));
+                                dataSplit[1].trim(),
+                                dataSplit[2] != null ? dataSplit[2].trim() : ""));
                 }
             }
 

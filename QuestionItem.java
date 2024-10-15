@@ -2,31 +2,23 @@ package FamilyFued;
 
 import java.util.ArrayList;
 
-public class QuestionItem implements Printable, Useable {
+public class QuestionItem implements Printable, Useable, Answerable {
 
     // Properties
-    private final int id;
     private final String difficulty;
     private final String question;
     private ArrayList<Answer> answers;
     private boolean isUsed;
 
     // Constructors
-    public QuestionItem(
-            int id, String difficulty, String question) {
-        this.id = id;
+    public QuestionItem(String difficulty, String question) {
         this.difficulty = difficulty;
         this.question = question;
-
         this.answers = new ArrayList<>();
         this.isUsed = false;
     }
 
     // Getters
-    public int getId() {
-        return id;
-    }
-
     public String getDifficulty() {
         return difficulty;
     }
@@ -43,21 +35,6 @@ public class QuestionItem implements Printable, Useable {
         return answers.get(index);
     }
 
-    public boolean getIfUsed() {
-        return isUsed;
-    }
-
-    // Setters
-    public QuestionItem setUsed() {
-        this.isUsed = true;
-        return this;
-    }
-
-    public QuestionItem setUsed(boolean value) {
-        this.isUsed = value;
-        return this;
-    }
-
     // Methods
     public QuestionItem addAnswer(Answer answer) {
         this.answers.add(answer);
@@ -72,10 +49,18 @@ public class QuestionItem implements Printable, Useable {
         return 0;
     }
 
+    public int getActiveQuestionsLeft() {
+        int ret = 0;
+        for (Answer answer : answers)
+            if (!answer.getIfUsed())
+                ret++;
+        return ret;
+    }
+
+    // Printable
     public String toString() {
         String ret = String.format(
-                "%02d-%s%s: %s",
-                this.id,
+                "%s%s: %s",
                 this.difficulty,
                 isUsed ? " [USED]" : "",
                 this.question);
@@ -89,4 +74,44 @@ public class QuestionItem implements Printable, Useable {
         System.out.println(this);
         return this;
     }
+
+    // Useable
+
+    public boolean getIfUsed() {
+        return isUsed;
+    }
+
+    public QuestionItem setUsed() {
+        this.isUsed = true;
+        return this;
+    }
+
+    public QuestionItem setUsed(boolean value) {
+        this.isUsed = value;
+        return this;
+    }
+
+    // Answerable
+    public Answer playAnswer(String answerText) {
+        Answer ret = null;
+        for (Answer answer : this.answers) {
+            if (answer.getIfUsed())
+                continue;
+            ret = answer.playAnswer(answerText);
+            if (ret != null)
+                break;
+        }
+
+        boolean allUsed = true;
+        for (Answer answer : this.answers) {
+            if (!answer.getIfUsed())
+                allUsed = false;
+        }
+
+        if (allUsed)
+            this.setUsed();
+
+        return ret;
+    }
+
 }
