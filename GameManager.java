@@ -45,6 +45,7 @@ public class GameManager implements Printable, Useable {
     public GameManager resetGame() {
         currentLife = maxLife;
         currentScore = 0;
+        usedQuestions = new ArrayList<>();
         questionMngr = new QuestionManager(PATH);
         return this;
     }
@@ -53,6 +54,8 @@ public class GameManager implements Printable, Useable {
         if (currentQuestion != null)
             usedQuestions.add(currentQuestion);
         currentQuestion = questionMngr.getRandomUnusedQuestion();
+        if (currentQuestion == null)
+            setUsed();
 
         return this;
     }
@@ -61,6 +64,8 @@ public class GameManager implements Printable, Useable {
         if (currentQuestion != null)
             usedQuestions.add(currentQuestion);
         currentQuestion = questionMngr.getQuestion(questionIndex);
+        if (currentQuestion == null)
+            setUsed();
         return this;
     }
 
@@ -96,6 +101,12 @@ public class GameManager implements Printable, Useable {
     }
 
     public GameManager playAnswer(String answerText) {
+        // If no questions are loaded, don't play answer
+        if (currentQuestion == null)
+            return this;
+        // If game is finished, don't play answer
+        if (getIfUsed() || currentQuestion.getIfUsed())
+            return this;
         Answer answered = currentQuestion.playAnswer(answerText);
         if (answered == null)
             loseLife();

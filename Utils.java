@@ -16,16 +16,28 @@ public class Utils {
         final int MAXLIVES = 3;
         GameManager game = new GameManager(PATH, MAXLIVES);
         game.startRound(0)
+                .playAnswer("egg")
+                .playAnswer("rice")
+                .playAnswer("noodle")
+                .playAnswer("hotdog")
+                .playAnswer("tuyo")
+                .playAnswer("fried rice")
+                .playAnswer("tinola")
+                .playAnswer("hotcake")
+                .playAnswer("hotcake")
                 .print()
-                .playAnswer("noodles")
+                .startRound()
                 .print()
-                .playAnswer("noodles")
+                .playAnswer("piano")
+                .playAnswer("drums")
+                .playAnswer("harp")
+                .playAnswer("guitar")
+                .playAnswer("cello")
+                .playAnswer("bass")
+                .playAnswer("organ")
+                .playAnswer("keyboard")
                 .print()
-                .playAnswer("hotdog sandwich")
-                .print()
-                .playAnswer("noodles")
-                .print()
-                .playAnswer("noodles")
+                .startRound()
                 .print();
 
         // QuestionManager questions = new QuestionManager(PATH);
@@ -56,6 +68,10 @@ public class Utils {
             // Read file line by line
             while (sc.hasNextLine()) {
                 String data = sc.nextLine();
+
+                // Stop reading if line contains /STOP/
+                if (data.contains("/STOP/"))
+                    break;
 
                 // Split line by dashes
                 String[] dataSplit = data.split("-");

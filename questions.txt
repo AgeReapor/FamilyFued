@@ -3,10 +3,10 @@ Medium - Name the first food people learn to cook.
     70 - Rice - kanin, grain
     60 - Pancit - noodle, bihon
     50 - Hotdog - sausage, hotdog
-    40 - Tuyo - dried fish, daing
+    40 - Tuyo - fried fish, daing
     30 - Sinangag - fried rice, garlic rice
-    20 - Tinola - chicken soup, broth
-    10 - Pancakes - pan, cake
+    20 - Tinola - chicken soup, chicken stew
+    10 - Pancakes - cake
 
 Medium - Name an instrument that is too big to bring on a plane.
     80 - Piano - keys, piano
@@ -17,6 +17,8 @@ Medium - Name an instrument that is too big to bring on a plane.
     30 - Bass - double bass
     20 - Organ - pipe
     10 - Keyboard - board
+
+///STOP///
 
 Medium - Name items of clothes that you need for the rainy season.
     80 - Raincoat - coat
