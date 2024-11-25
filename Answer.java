@@ -22,7 +22,16 @@ public class Answer implements Printable, Useable, Answerable {
         }
     }
 
-    // Answerable
+    // getter
+    public int getScore() {
+        return this.score;
+    }
+
+    public String getAnswerText() {
+        return this.answerText;
+    }
+
+    // Useable
     public boolean getIfUsed() {
         return isUsed;
     }
@@ -34,6 +43,11 @@ public class Answer implements Printable, Useable, Answerable {
 
     public Answer setUsed(boolean value) {
         this.isUsed = value;
+        return this;
+    }
+
+    public Answer reset() {
+        this.isUsed = false;
         return this;
     }
 
@@ -69,4 +83,5 @@ public class Answer implements Printable, Useable, Answerable {
         }
         return null;
     }
+
 }

@@ -91,6 +91,13 @@ public class QuestionItem implements Printable, Useable, Answerable {
         return this;
     }
 
+    public QuestionItem reset() {
+        for (Answer answer : this.answers)
+            answer.reset();
+        this.isUsed = false;
+        return this;
+    }
+
     // Answerable
     public Answer playAnswer(String answerText) {
         Answer ret = null;

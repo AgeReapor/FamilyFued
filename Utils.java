@@ -7,50 +7,60 @@ import java.util.ArrayList;
 
 public class Utils {
 
-    // Debug Driver Function
-    public static void main(String[] args) {
+    // // Debug Driver Function
+    // public static void main(String[] args) {
 
-        // * CHANGE THIS TO FULL PATH OF FILE
-        final String PATH = "C:\\Users\\ajrea\\OneDrive\\Documents\\School\\UNC\\24-25 1st\\OOP\\activities\\FamilyFued\\questions.txt";
+    // // * CHANGE THIS TO FULL PATH OF QUESTION FILE
+    // final String PATH =
+    // "C:\\Users\\ajrea\\OneDrive\\Documents\\School\\UNC\\24-25
+    // 1st\\OOP\\activities\\FamilyFued\\questions.txt";
 
-        final int MAXLIVES = 3;
-        GameManager game = new GameManager(PATH, MAXLIVES);
-        game.startRound(0)
-                .playAnswer("egg")
-                .playAnswer("rice")
-                .playAnswer("noodle")
-                .playAnswer("hotdog")
-                .playAnswer("tuyo")
-                .playAnswer("fried rice")
-                .playAnswer("tinola")
-                .playAnswer("hotcake")
-                .playAnswer("hotcake")
-                .print()
-                .startRound()
-                .print()
-                .playAnswer("piano")
-                .playAnswer("drums")
-                .playAnswer("harp")
-                .playAnswer("guitar")
-                .playAnswer("cello")
-                .playAnswer("bass")
-                .playAnswer("organ")
-                .playAnswer("keyboard")
-                .print()
-                .startRound()
-                .print();
+    // final int MAXLIVES = 3;
+    // GameManager game = new GameManager(PATH, MAXLIVES);
+    // game.print()
+    // .startRound(0)
+    // .print()
+    // .printRound()
+    // .playAnswer("egg")
+    // .print()
+    // .printRound()
+    // .playAnswer("rice")
+    // .playAnswer("noodle")
+    // .playAnswer("hotdog")
+    // .playAnswer("tuyo")
+    // .playAnswer("fried rice")
+    // .playAnswer("tinola")
+    // .playAnswer("hotcake")
+    // .playAnswer("hotcake")
+    // .print()
+    // .printRound()
+    // .startRound()
+    // .print()
+    // .printRound()
+    // .print()
+    // .playAnswer("piano")
+    // .playAnswer("drums")
+    // .playAnswer("harp")
+    // .playAnswer("guitar")
+    // .playAnswer("cello")
+    // .playAnswer("bass")
+    // .playAnswer("organ")
+    // .playAnswer("keyboard")
+    // .print()
+    // .startRound()
+    // .print();
 
-        // QuestionManager questions = new QuestionManager(PATH);
-        // QuestionItem current = null;
-        // while (true) {
-        // current = questions.getRandomUnusedQuestion();
-        // if (current == null)
-        // break;
-        // current.setUsed();
-        // current.print();
-        // }
+    // // QuestionManager questions = new QuestionManager(PATH);
+    // // QuestionItem current = null;
+    // // while (true) {
+    // // current = questions.getRandomUnusedQuestion();
+    // // if (current == null)
+    // // break;
+    // // current.setUsed();
+    // // current.print();
+    // // }
 
-    }
+    // }
 
     /*
      * Generates questions from pathToFile
@@ -105,5 +115,4 @@ public class Utils {
         // Return the list
         return questionList;
     }
-
 }

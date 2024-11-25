@@ -6,4 +6,6 @@ public interface Useable {
     public Useable setUsed();
 
     public Useable setUsed(boolean value);
+
+    public Useable reset();
 }

@@ -1,10 +1,13 @@
 package FamilyFued;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
-public class GameManager implements Printable, Useable {
+public class GameManager implements Printable {
+
     private final String PATH;
     private final int maxLife;
+    private GameState gameState;
 
     private QuestionManager questionMngr;
     private int currentLife;
@@ -39,33 +42,44 @@ public class GameManager implements Printable, Useable {
         return currentScore;
     }
 
+    public QuestionItem getCurrentQuestion() {
+        return currentQuestion;
+    }
+
+    public GameState getGameState() {
+        return gameState;
+    }
+
     // Methods
 
     /* Functional Methods */
     public GameManager resetGame() {
+        gameState = GameState.GAMESTART;
         currentLife = maxLife;
         currentScore = 0;
+        currentQuestion = null;
         usedQuestions = new ArrayList<>();
         questionMngr = new QuestionManager(PATH);
         return this;
     }
 
     public GameManager startRound() {
+        gameState = GameState.ROUNDSTART;
         if (currentQuestion != null)
             usedQuestions.add(currentQuestion);
         currentQuestion = questionMngr.getRandomUnusedQuestion();
         if (currentQuestion == null)
-            setUsed();
-
+            gameState = GameState.GAMEWON;
         return this;
     }
 
     public GameManager startRound(int questionIndex) {
+        gameState = GameState.ROUNDSTART;
         if (currentQuestion != null)
             usedQuestions.add(currentQuestion);
         currentQuestion = questionMngr.getQuestion(questionIndex);
         if (currentQuestion == null)
-            setUsed();
+            gameState = GameState.GAMEWON;
         return this;
     }
 
@@ -84,14 +98,10 @@ public class GameManager implements Printable, Useable {
     public String toString() {
         String ret = String.format(
                 "[FAMILY FUED] [STATUS: %s] [Lives: %d/%d] [Score: %d] ",
-                getIfUsed() ? "GAME FINISHED" : "ONGOING",
+                gameState,
                 currentLife,
                 maxLife,
                 currentScore);
-
-        if (currentQuestion != null) {
-            ret += "\n" + currentQuestion.toString();
-        }
         return ret;
     }
 
@@ -100,35 +110,45 @@ public class GameManager implements Printable, Useable {
         return this;
     }
 
+    public GameManager printRound() {
+        if (currentQuestion != null)
+            currentQuestion.print();
+        return this;
+    }
+
     public GameManager playAnswer(String answerText) {
         // If no questions are loaded, don't play answer
         if (currentQuestion == null)
             return this;
-        // If game is finished, don't play answer
-        if (getIfUsed() || currentQuestion.getIfUsed())
+        // If round is not started, don't play answer
+        if (gameState != GameState.ROUNDRUNNING && gameState != GameState.ROUNDSTART)
             return this;
+
+        // Submit the Answer
         Answer answered = currentQuestion.playAnswer(answerText);
-        if (answered == null)
+
+        // If answer is wrong
+        if (answered == null) {
             loseLife();
-        else
+
+            // Check if game over
+            if (currentLife <= 0)
+                gameState = GameState.GAMEOVER;
+
+            // If answer is correct
+        } else {
             addScore(answered.score);
+            gameState = GameState.ROUNDRUNNING;
+
+            // Check if question is completed
+            if (currentQuestion.getIfUsed())
+                gameState = GameState.ROUNDOVER;
+        }
         return this;
     }
 
-    public boolean getIfUsed() {
-        return currentLife == 0;
-    };
-
-    public GameManager setUsed() {
-        currentLife = 0;
-        return this;
-    };
-
-    public GameManager setUsed(boolean value) {
-        if (value)
-            setUsed();
-        else
-            currentLife = maxLife;
+    public GameManager reset() {
+        this.resetGame();
         return this;
     };
 }
