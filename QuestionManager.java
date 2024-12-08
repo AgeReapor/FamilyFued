@@ -25,15 +25,6 @@ public class QuestionManager {
         return questions[index];
     }
 
-    public int getUsedCount() {
-        int count = 0;
-        for (QuestionItem question : questions) {
-            if (!question.getIfUsed())
-                count++;
-        }
-        return count;
-    }
-
     // Methods
     // ! NOT TRUE RANDOM, TENDS TO GO IN ORDER
     // * Then again, nothing is truly random

@@ -14,6 +14,8 @@ public class GameManager implements Printable {
     private int currentScore;
     private QuestionItem currentQuestion;
     private ArrayList<QuestionItem> usedQuestions;
+    private Answer lastAnswer;
+    private String lastInput;
 
     // Constructors
     public GameManager(String PATH, int maxLives) {
@@ -38,6 +40,10 @@ public class GameManager implements Printable {
         return currentLife;
     }
 
+    public int getMaxLife() {
+        return maxLife;
+    }
+
     public int getCurrentScore() {
         return currentScore;
     }
@@ -50,6 +56,18 @@ public class GameManager implements Printable {
         return gameState;
     }
 
+    public Answer getLastAnswer() {
+        return lastAnswer;
+    }
+
+    public String getLastInput() {
+        return lastInput;
+    }
+
+    public ArrayList<QuestionItem> getUsedQuestions() {
+        return usedQuestions;
+    }
+
     // Methods
 
     /* Functional Methods */
@@ -60,16 +78,20 @@ public class GameManager implements Printable {
         currentQuestion = null;
         usedQuestions = new ArrayList<>();
         questionMngr = new QuestionManager(PATH);
+        lastAnswer = null;
+        lastInput = "";
         return this;
     }
 
-    public GameManager startRound() {
+    public GameManager startRound(boolean isDebug) {
         gameState = GameState.ROUNDSTART;
         if (currentQuestion != null)
             usedQuestions.add(currentQuestion);
         currentQuestion = questionMngr.getRandomUnusedQuestion();
         if (currentQuestion == null)
             gameState = GameState.GAMEWON;
+        else if (isDebug)
+            System.out.print("Loaded question: " + currentQuestion + "\n");
         return this;
     }
 
@@ -85,6 +107,13 @@ public class GameManager implements Printable {
 
     public GameManager loseLife() {
         currentLife--;
+
+        gameState = GameState.ROUNDRUNNING;
+
+        // Check if game over
+        if (currentLife <= 0)
+            gameState = GameState.GAMEOVER;
+
         return this;
     }
 
@@ -126,15 +155,12 @@ public class GameManager implements Printable {
 
         // Submit the Answer
         Answer answered = currentQuestion.playAnswer(answerText);
+        lastInput = answerText;
+        lastAnswer = answered;
 
         // If answer is wrong
         if (answered == null) {
             loseLife();
-
-            // Check if game over
-            if (currentLife <= 0)
-                gameState = GameState.GAMEOVER;
-
             // If answer is correct
         } else {
             addScore(answered.score);
@@ -145,6 +171,29 @@ public class GameManager implements Printable {
                 gameState = GameState.ROUNDOVER;
         }
         return this;
+    }
+
+    public int getQuestionAnsweredCount() {
+        int count = 0;
+        for (QuestionItem question : usedQuestions) {
+            if (question.getIfUsed())
+                count++;
+        }
+        return count;
+    }
+
+    public int getAnswersAnsweredCount() {
+        int count = 0;
+        for (QuestionItem question : usedQuestions) {
+            if (question.getIfUsed())
+                count += question.getAnswers().size();
+            else
+                for (Answer answer : question.getAnswers()) {
+                    if (answer.getIfUsed())
+                        count++;
+                }
+        }
+        return count;
     }
 
     public GameManager reset() {
